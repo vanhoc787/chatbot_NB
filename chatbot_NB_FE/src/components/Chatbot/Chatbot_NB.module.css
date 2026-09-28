@@ -1,0 +1,501 @@
+/****************************************************
+ * Chatbot_NB.module.css
+ * Giao diện chatbot tương tự ChatGPT - tone Agribank
+ ****************************************************/
+:root {
+    --primary-color: #da251d;
+    --sidebar-bg: #212529;
+    --card-bg: #ffffff;
+    --border-color: #dee2e6;
+    --text-color: #333;
+    --sidebar-width: 240px;
+}
+/* Tổng thể bố cục */
+.chatAppShell {
+  /* Use Inter (ChatGPT-like) for chat UI only. Falls back to system UI fonts. */
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  display: flex;
+  height: calc(var(--vh, 1vh) * 100);
+  background: #f4f4f6;
+  font-family: "Inter", sans-serif;
+  border-radius: 8px;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Sidebar trái */
+.sidebar {
+  width: 270px;
+  background: #11152b;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebarTop {
+  padding: 20px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  font-size: 28px;
+}
+
+.brandTitle {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+/* Menu điều hướng */
+.sidebarNav {
+  padding: 0 12px;
+}
+
+.navBtn {
+  width: 100%;
+  background: #c81414;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.navBtn:hover {
+  background: #a81010;
+}
+
+.active {
+  background: #b71313;
+}
+
+.icon {
+  font-size: 20px;
+  width: 1em;
+  height: 1em;
+}
+
+/* Footer người dùng */
+.sidebarBottom {
+  padding: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.userMini {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.userAva {
+  font-size: 28px;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+  font-weight: 500;
+}
+
+.smallBtn {
+  margin-top: 4px;
+  background: #2b2e48;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 13px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.smallBtn:hover {
+  background: #404568;
+}
+
+.logoutBtn {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  color: #fff;
+  padding: 8px 0;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.logoutBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Khu vực chat chính */
+.chatMain {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.chatHeader {
+  text-align: center;
+  font-size: 18px;
+  padding: 5px;
+}
+
+.chatContainer {
+  display:flex;
+  flex-direction:column;
+  padding-left: 20px;
+  padding-right: 20px;
+  gap: 12px;
+  height: calc(var(--vh, 1vh) * 100 - 64px);
+  box-sizing: border-box;
+}
+
+.logo {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo img {
+    max-width: 100%;
+    height: auto;
+    max-height: 50px;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* smooth momentum scrolling on iOS */
+  padding-bottom: calc(88px + env(safe-area-inset-bottom, 12px)); /* reserve space for composer */
+}
+
+/* Tin nhắn */
+.messageRow {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 14px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #e1e1e1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.bubbleWrap {
+  max-width: 70%;
+}
+
+.bubble {
+  border-radius: 16px;
+  padding: 10px 14px;
+  line-height: 1.4;
+  font-size: 15px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.botBubble {
+  background: #ffffff;
+  color: #111;
+  border-bottom-left-radius: 4px;
+}
+
+.userBubble {
+  background: #a80e0e;
+  color: #fff;
+  border-bottom-right-radius: 4px;
+  margin-left: auto;
+}
+
+.bubbleMeta {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #888;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.sender {
+  font-weight: 500;
+}
+
+.time {
+  font-style: italic;
+}
+
+/* Hiệu ứng typing (bot đang gõ) */
+.typing {
+  background: #ffffff;
+  width: 60px;
+  padding: 10px;
+}
+
+.typingDots {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 36px;
+  margin: 0 auto;
+}
+
+.typingDots span {
+  width: 6px;
+  height: 6px;
+  background: #a1a1a1;
+  border-radius: 50%;
+  animation: blink 1.4s infinite both;
+}
+
+.typingDots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typingDots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0%, 80%, 100% {
+    opacity: 0.2;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+/* Khung nhập liệu */
+.divComposer{
+  display: flex;
+  justify-content: center;
+  padding: 12px;
+  position: sticky;
+  bottom: env(safe-area-inset-bottom, 12px);
+  z-index: 30;
+  backdrop-filter: blur(6px);
+}
+
+.composer {
+  display: flex;
+  align-items: center;
+  background: #cbcaca;
+  padding: 6px 8px;
+  border-radius: 30px;
+  width: 60%;
+  box-sizing: border-box;
+}
+
+.composerInput {
+  flex: 1;
+  resize: none;
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-size: 16px !important;
+  background: #cbcaca;
+  color: #000000;
+  max-height: 160px;
+  line-height: 1.3;
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation;
+}
+
+.sendBtn {
+  margin-left: 10px;
+  background: #a80e0e;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  transition: background 0.2s ease-in-out;
+}
+
+/* Ensure the whole chat shell fills the locked viewport height */
+.chatAppShell {
+  height: calc(var(--vh, 1vh) * 100);
+  display: flex;
+  flex-direction: column;
+}
+
+.sendBtn:hover {
+  background: #850b0b;
+}
+
+/* Cuộn mượt và ẩn thanh scroll */
+.messages::-webkit-scrollbar {
+  width: 6px;
+}
+.messages::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+body{
+  background-image: none;
+}
+
+
+.lds-ellipsis,
+.lds_ellipsis div {
+  box-sizing: border-box;
+}
+.lds_ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds_ellipsis div {
+  position: absolute;
+  top: 33.33333px;
+  width: 13.33333px;
+  height: 13.33333px;
+  border-radius: 50%;
+  background: currentColor;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds_ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds_ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds_ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds_ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
+
+.loading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(var(--vh, 1vh) * 100);
+}
+
+.empty{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+}
+
+/* Responsive tweaks for Chatbot layout */
+@media (max-width: 1024px) {
+  .sidebar { width: 220px; }
+  .chatContainer { padding-left: 16px; padding-right: 16px; }
+  .composer { width: 70%; }
+  .divComposer { padding: 2vh;}
+}
+
+@media (max-width: 768px) {
+  .chatAppShell { flex-direction: column; height: auto; }
+  .sidebar { width: 100%; flex-direction: row; padding: 8px; align-items: center; }
+  .chatMain { width: 100%; height: 100%;}
+  .chatContainer { padding: 12px; }
+  .messages { padding: 12px}
+  .composer { width: 100%; }
+  .divComposer { padding: 10px; }
+  .sendBtn { width: 40px; height: 40px; }
+  .chatHeader{margin-bottom: -20px; margin-top: -10px;}
+  .empty { font-size: 15px; }
+  .bubbleWrap { max-width: 85%; }
+}
+
+@media (max-width: 520px) {
+  .sidebarTop { display: none; }
+  .brandTitle { display: none; }
+  .avatar { width: 32px; height: 32px; }
+  .bubble { font-size: 13px; }
+  .icon { font-size: 17px !important; min-width: 0.9em; min-height: 0.9em;}
+  .divComposer { padding: 8px; }
+  /* Ensure the SVG icon inside the button keeps a consistent visual size */
+  .sendBtn svg path{
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Small-screen tweaks to keep the composer and send icon usable */
+/* @media (max-width: 420px) {
+  .composer {
+    width: 100%;
+    padding: 8px;
+  }
+
+  .composerInput {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .sendBtn {
+    width: 48px;
+    height: 48px;
+    min-width: 44px;
+    min-height: 44px;
+    margin-left: 8px;
+  }
+} */
+

@@ -1,0 +1,623 @@
+@media (max-width: 1400px) {
+  .actionCell {
+    min-width: 40px;
+    gap: 4px;
+  }
+}
+
+/* 🌟 Tổng thể trang import */
+.uploadSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;   /* Căn giữa theo chiều dọc */
+  height: 80vh;             /* Chiếm toàn bộ chiều cao màn hình */
+  gap: 20px;
+  background: #fff;
+}
+
+.fileList{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;   /* Căn giữa theo chiều dọc */
+  gap: 20px;
+  background: #fff;
+}
+
+/* Ẩn input mặc định */
+.hiddenInput {
+  display: none;
+}
+
+/* 🎯 Vùng dropzone chính */
+.dropZone {
+  width: 100%;
+  max-width: 600px;
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+  padding: 50px 20px;
+  text-align: center;
+  background: #fff;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.dropZone:hover {
+  border-color: #e74c3c;
+  background: #fdf2f2;
+  color: #e74c3c;
+}
+
+/* 🔴 Khi đang kéo file vào vùng drop */
+.dropZone.active {
+  border-color: #e74c3c;
+  background-color: #e74c3c;
+  color: white;
+  box-shadow: 0 0 20px rgba(231, 76, 60, 0.3);
+  transform: scale(1.02);
+}
+
+.dropContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.dropTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.dropSub {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+.filesub{
+  font-weight: bold;
+}
+
+/* 📤 Nút tải lên */
+.uploadBtn {
+  background: rgb(174, 28, 63);
+  color: white;
+  border: none;
+  padding: 6px 15px;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.1s ease;
+}
+
+.uploadBtn:hover {
+  background: rgb(205, 75, 105);
+  transform: translateY(-2px);
+}
+
+.uploadBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Tab container (nền trắng với viền trên, bo góc trên) */
+.tabsContainer {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  padding: 8px 16px;
+  box-sizing: border-box;
+}
+
+/* Dòng chứa các tab */
+.tabList {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  position: relative;
+}
+
+/* Nút/tab cơ bản */
+.tabButton {
+  background: transparent;
+  border: none;
+  padding: 10px 6px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #666;              /* màu chữ mặc định */
+  cursor: pointer;
+  outline: none;
+  border-radius: 4px 4px 0 0;
+  transition: color 0.18s ease, transform 0.06s ease;
+}
+
+/* hover nhẹ cho trải nghiệm */
+.tabButton:hover {
+  color: #b00000;
+  transform: translateY(-1px);
+}
+
+/* Tab active: chữ đỏ + gạch dưới bằng box-shadow (gọn và dễ) */
+.tabButtonActive {
+  color: #d32f2f; /* đỏ chủ đạo */
+  box-shadow: inset 0 -3px 0 0 #d32f2f;
+}
+
+/* optional: một "track" viền nhẹ dưới toàn bộ tab bar */
+.tabBottomLine {
+  height: 1px;
+  background: #f0f0f0;
+  margin-top: 8px;
+}
+
+/* Small responsive tweak */
+@media (max-width: 520px) {
+  .tabList { gap: 12px; }
+  .tabButton { font-size: 13px; padding: 8px 4px; }
+}
+
+.sidebarSpan{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebarSpanStrong{
+    padding-left: 1vh;
+    font-size: 15px;
+}
+
+
+.lds_ellipsis,
+.lds_ellipsis div {
+  box-sizing: border-box;
+}
+.lds_ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 60px;
+  height: 14px;
+}
+.lds_ellipsis div {
+  position: absolute;
+  width: 13.33333px;
+  height: 13.33333px;
+  border-radius: 50%;
+  background: currentColor;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds_ellipsis div:nth-child(1) {
+  left: 0px;
+  animation: lds_ellipsis1 0.6s infinite;
+}
+.lds_ellipsis div:nth-child(2) {
+  left: 0px;
+  animation: lds_ellipsis2 0.6s infinite;
+}
+.lds_ellipsis div:nth-child(3) {
+  left: 24px;
+  animation: lds_ellipsis2 0.6s infinite;
+}
+.lds_ellipsis div:nth-child(4) {
+  left: 48px;
+  animation: lds_ellipsis3 0.6s infinite;
+}
+@keyframes lds_ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds_ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds_ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
+
+.tableWrapper {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  /* Optimized for DataTable */
+}
+
+.tableContainer {
+  width: 100%;
+  flex: 1;
+  overflow: hidden;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px 8px 0 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Scrollable area for file list inside the table container */
+.listScroll {
+  flex: 1;            /* take remaining vertical space */
+  min-height: 0;      /* allow proper flexchildren clipping */
+  overflow-y: auto;   /* enable vertical scroll */
+  padding: 12px 12px; /* breathing room */
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  max-height: 86vh;
+}
+
+/* Optional: nicer scrollbar for WebKit browsers */
+.listScroll::-webkit-scrollbar {
+  width: 10px;
+}
+.listScroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.listScroll::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.12);
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+.listScroll:focus { outline: none; }
+
+.dataTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.actionButton {
+  padding: 0.5vh !important;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 4px;
+  border: 1px solid #d1d5db;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: none;
+  letter-spacing: 0.025em;
+  min-width: 65px;
+  text-align: center;
+  background-color: white;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.actionButton:hover {
+  border-color: #9ca3af;
+  background-color: #f9fafb;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.actionButton:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Edit button */
+.actionButton {
+  color: #3b82f6;
+  border-color: #dbeafe;
+}
+
+.actionButton:hover {
+  background-color: #eff6ff;
+  border-color: #93c5fd;
+}
+
+/* Disable/Enable button */
+.actionButton.disable {
+  color: #f59e0b;
+  border-color: #fed7aa;
+}
+
+.actionButton.disable:hover {
+  background-color: #fffbeb;
+  border-color: #fbbf24;
+}
+
+/* Delete button */
+.actionButton.delete {
+  color: #ef4444;
+  border-color: #fecaca;
+}
+
+.actionButton.delete:hover {
+  background-color: #fef2f2;
+  border-color: #f87171;
+}
+
+/* Change Password button */
+.actionButton.changePassword {
+  color: #8b5cf6;
+  border-color: #e9d5ff;
+}
+
+.actionButton.changePassword:hover {
+  background-color: #faf5ff;
+  border-color: #c4b5fd;
+}
+
+.actionButton.delete:hover {
+  background-color: #fef2f2;
+  border-color: #f87171;
+}
+
+/* SVG icons for buttons - Optimized for compact layout */
+.actionButton svg {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+/* Focus states for accessibility */
+.actionButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+.actionButton.disable:focus {
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3);
+}
+
+.actionButton.delete:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
+}
+
+/* Disabled state */
+.actionButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.actionButton {
+    padding: 0;
+    font-size: 11px;
+    min-width: 40px;
+  }
+
+.actionButton svg {
+  width: 20px;
+  height: 20px;
+}
+
+.actionButton {
+    padding: 0;
+    font-size: 10px;
+    min-width: 30px;
+    gap: 2px;
+  }
+
+.actionButton svg {
+  width: 20px;
+  height: 20px;
+}
+
+.actionCell {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: end;
+  flex-wrap: nowrap;
+  min-width: 40px;
+  max-width: 300px;
+  overflow: visible;
+  padding-right: 10px;
+}
+
+/* Remove border from last row to prevent height inconsistency */
+.dataTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.dataTable tbody tr:hover {
+  background-color: #fbe9e7;
+}
+
+.dataTable thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.dataTable thead th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: var(--text-light);
+  position: relative;
+}
+
+.dataTable th,
+.dataTable td {
+  padding: 10px 8px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--border-color);
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.4;
+  vertical-align: middle;
+}
+
+/* Remove border from last row to prevent height inconsistency */
+.dataTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.dataTable tbody tr:hover {
+  background-color: #fbe9e7;
+}
+
+/* Enhanced text display for content-heavy columns */
+.dataTable td:nth-child(2) {
+  /* Họ và Tên - allow text wrapping for long names */
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.dataTable th:nth-child(2),
+.dataTable td:nth-child(2) {
+  width: 150px !important;
+}
+
+.dataTable td:nth-child(4) {
+  /* Phòng ban - allow text wrapping for department names */
+  line-height: 1.3;
+}
+
+/* Prevent action cell content from wrapping */
+.dataTable td:nth-child(8) {
+  white-space: nowrap;
+  overflow: visible;
+}
+
+
+.iconSVG{
+  font-size: 20px;
+  margin-bottom: -3px;
+}
+
+/* Responsive rules for Import page */
+@media (max-width: 1024px) {
+  .dropZone { max-width: 720px; padding: 40px 16px; }
+  .uploadSection, .fileList { height: auto; padding: 24px 12px; }
+  .uploadBtn { padding: 5px 10px; font-size: 0.95rem; }
+  .divListFile{ max-width: 100vh; min-width: 70vh; }
+}
+
+@media (max-width: 768px) {
+  .dropZone { padding: 28px 12px; border-radius: 10px; }
+  .dropTitle { font-size: 1rem; }
+  .uploadBtn { width: 100%; display: block; }
+  .dropSub { font-size: 0.75rem;}
+  .sidebarSpanStrong { font-size: 14px;}
+}
+
+@media (max-width: 520px) {
+  .dropZone { padding: 20px 10px; }
+  .dropContent { gap: 6px; }
+  .dropTitle { font-size: 1rem; }
+  .tabList { gap: 8px; }
+}
+
+.outFile {
+  font-size: 15px;
+  padding: 1vh;
+}
+.ulListFile{
+  margin: 5px;
+  padding: 5px;
+}
+.ulListFile li{
+  text-align: left;
+  font-size: 16px;
+  border-bottom: 1px solid var
+#dee2e6
+(--border-color);
+  line-height: 1.4;
+}
+.divListFile{
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  max-height: 25vh;
+  max-width: 130vh;
+  min-width: 90vh;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 4px;
+}
+
+/* Column-specific widths and alignment for the import table */
+.colTitleHeader { width: 70%; text-align: left; }
+.colDateHeader { width: 20%; text-align: left; }
+.colActionHeader { width: 10%; text-align: right; }
+.trHeader th {font-weight: bold !important;}
+
+.colTitle { max-width: 70%; }
+.colDate { max-width: 20%; color: #374151; font-size: 13px; }
+.colAction { display: flex; justify-content: flex-end; }
+
+/* Filter bar styles */
+.filterBar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--border-color);
+}
+.filterInput {
+  flex: 1 1 40%;
+  padding: 8px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 14px;
+}
+.dateFilters {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.dateInput {
+  padding: 6px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 13px;
+}
+.clearButton {
+  padding: 6px 10px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.clearButton:hover { background: #f9fafb; }
+/* Ensure table layout is stable */
+.dataTable { table-layout: fixed; }
+.dataTable td, .dataTable th { overflow: hidden; text-overflow: ellipsis; }
+.spanFilter{ font-size: 13px; font-weight: bold;}
+
+@media (max-width: 768px) {
+  .colTitleHeader { width: 60%; }
+  .colDateHeader { width: 25%; }
+  .colActionHeader { width: 15%; }
+  .actionCell { gap: 4px; }
+  .actionButton span { display: none; }
+}
+
+/* @media (max-width: 520px) {
+  .colTitleHeader { width: 50%; }
+  .colDateHeader { width: 30%; }
+  .colActionHeader { width: 20%; }
+  .sidebarSpanStrong { font-size: 13px; }
+} */
+
